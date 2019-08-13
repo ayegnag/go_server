@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "heroku-postbuild": "cd client/ && yarn && yarn run build",
+    "build": "yarn build --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
