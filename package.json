@@ -1,0 +1,23 @@
+{
+  "name": "go-server",
+  "version": "0.4.0",
+  "description": "Socket backend server for Go",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayegnag/go_server.git"
+  },
+  "author": "Gangeya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayegnag/go_server/issues"
+  },
+  "homepage": "https://github.com/ayegnag/go_server#readme",
+  "dependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
