@@ -1,6 +1,22 @@
-const io = require("socket.io")();
-io.set("origins", "https://go-game-gangeya.herokuapp.com/");
+const express = require("express");
+const bodyParser = require("body-parser");
+const path = require("path");
+
+const app = express();
+var server = require("http").createServer(app);
+var io = require("socket.io")(server);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
 io.on("connection", client => {
+  console.log("Got WS connection", client.id);
+
   client.on("createGane", roomId => {
     console.log("Client is creating a new game room ", client.id, roomId);
     client.join(roomId);
@@ -29,10 +45,10 @@ io.on("connection", client => {
     // const room = io.sockets.adapter.rooms[client.id];
     const { room, data } = req;
     client.to(room).emit("turnData", data);
-    console.log("Player made a move ", room, data);
+    console.log("Player made a move ", room);
   });
 });
 
-const port = 8000;
-io.listen(port);
-console.log("listening on port ", port);
+server.listen(3000, () =>
+  console.log("Express server is running on localhost:3000")
+);
