@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ayegnag/go_server#readme",
   "dependencies": {
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "socket.io": "^2.2.0"
   }
 }
