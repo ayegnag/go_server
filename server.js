@@ -1,5 +1,5 @@
 const io = require("socket.io")();
-
+io.set("origins", "https://go-game-gangeya.herokuapp.com/");
 io.on("connection", client => {
   client.on("createGane", roomId => {
     console.log("Client is creating a new game room ", client.id, roomId);
