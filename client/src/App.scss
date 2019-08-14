@@ -65,7 +65,7 @@ $size19-mob: calc(#{$cell-mob} * 19 + #{$board-borderthickness} * 2);
 
 .App {
   text-align: center;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
