@@ -1,0 +1,192 @@
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.pageTitle {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  min-height: 20vh;
+  min-width: 35vh;
+  margin-bottom: 2vw;
+  @include for-size(phone-only) {
+    min-width: 45vh;
+  }
+  .titleContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    .logo {
+      height: 9vw;
+      @include for-size(phone-only) {
+        height: 35vw;
+      }
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border-radius: 2vh;
+  background: #5b3630a6;
+  min-width: 25vw;
+  min-height: 40vh;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  @include for-size(phone-only) {
+    min-width: 45vh;
+  }
+  .sub {
+    text-align: center;
+    color: #fff;
+    font-family: monospace;
+    text-transform: uppercase;
+    text-shadow: 0px 0px 10px #fff9e9;
+  }
+  .text {
+    padding-top: 2%;
+    padding-left: 5%;
+    text-align: left;
+    color: #fff;
+  }
+  .menuBar.input {
+    justify-content: space-evenly;
+  }
+  .menuBar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 3%;
+    .codeBox {
+      font-size: 2em;
+      color: #555;
+      background: #fff;
+      padding: 0.5em;
+      text-transform: lowercase;
+      border-radius: 0.5em;
+    }
+    .sizeButton {
+      width: 6vw;
+      height: 6vw;
+      background: #c5b98d;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      color: #333;
+      display: flex;
+      @include for-size(phone-only) {
+        width: 20vw;
+        height: 20vw;
+      }
+      &::after {
+        content: "2";
+        font-size: 0.5em;
+        color: #222;
+        position: absolute;
+        top: 0.1em;
+        font-size: 0.5em;
+        right: 0.2em;
+      }
+      &:hover {
+        background: #ccb460;
+        color: #222;
+        cursor: pointer;
+      }
+    }
+    .sizeButton.active {
+      background: #dabd57;
+      color: #222;
+    }
+    .stoneButton.white {
+      background: #fff;
+    }
+    .stoneButton.black {
+      background: #222;
+    }
+    .stoneButton {
+      width: 3vw;
+      height: 3vw;
+      border-radius: 50%;
+      @include for-size(phone-only) {
+        width: 8vw;
+        height: 8vw;
+      }
+      &:hover {
+        padding: 0.1vw;
+        cursor: pointer;
+      }
+    }
+    .stoneButton.active {
+      padding: 0.5vw;
+      border: solid 2px #ccb460;
+      @include for-size(phone-only) {
+        padding: 3vw;
+      }
+    }
+    .menuButton {
+      user-select: none;
+      background: #ffffff;
+      min-width: 6vw;
+      border-radius: 0.6em;
+      color: #271911;
+      font-weight: 600;
+      padding: 1em;
+      border: none;
+      &:hover {
+        background: #e8cc00;
+        cursor: pointer;
+      }
+    }
+    .menuButton.large {
+      width: 16vw;
+      @include for-size(phone-only) {
+        width: 56vw;
+      }
+    }
+    .menuButton.dark {
+      background: #271911;
+      color: #fff;
+      &:hover {
+        background: #e8cc00;
+        color: #333;
+        cursor: pointer;
+      }
+    }
+    .quickInput {
+      background: #ffffff;
+      max-width: 4em;
+      border-radius: 0.6em;
+      color: #271911;
+      font-weight: 600;
+      font-size: 1.1em;
+      line-height: 1vw;
+      padding: 1em;
+      max-height: 1em;
+      text-align: center;
+      border: none;
+    }
+  }
+}

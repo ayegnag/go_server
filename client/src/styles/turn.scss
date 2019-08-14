@@ -1,0 +1,112 @@
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.Turn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 10vw;
+  height: 20vw;
+  background: #a76a26;
+  border-radius: 5%;
+  position: relative;
+  @include for-size(phone-only) {
+    width: 50vw;
+    height: 40vw;
+  }
+  .big {
+    width: 5vw;
+    height: 5vw;
+    top: unset;
+    left: unset;
+    @include for-size(phone-only) {
+      width: 8vw;
+      height: 8vw;
+      left: calc(50% - 4vw);
+    }
+  }
+
+  .button {
+    background: #e8cc7b;
+    border-radius: 10%;
+    color: #5a2409;
+    font-weight: 600;
+    padding: 0.8vw;
+    border: none;
+    &:hover {
+      background: #e8cc00;
+      cursor: pointer;
+    }
+  }
+  .topContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .title {
+    width: 100%;
+    font-size: 1.1em;
+    font-weight: 100;
+    color: #ffe;
+    margin-bottom: 1vw;
+  }
+  .info {
+    color: #fff9e9;
+  }
+  .topTools {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding-top: 0.5vw;
+  }
+  .bottomTools {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 0.5vw;
+  }
+  .toolDiv {
+    flex: 1;
+    height: 1vw;
+  }
+  .tools {
+    color: #2b221985;
+    &:hover {
+      color: #fff;
+      cursor: pointer;
+      width: 1.1em;
+      height: 1.1em;
+    }
+  }
+}

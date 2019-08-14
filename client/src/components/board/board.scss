@@ -1,0 +1,355 @@
+$cell: 2vw;
+$cross-size: 2vw;
+$cross-size-mob: 5vw;
+$cell-mob: 5vw;
+// $cross-colour: #999;
+$cross-colour: #74483b;
+$cross-linethickness: 1px;
+$board-border: #ad702a;
+$board-borderthickness: 1vw;
+$size9: calc(#{$cell} * 9 + #{$board-borderthickness} * 2);
+$size13: calc(#{$cell} * 13 + #{$board-borderthickness} * 2);
+$size19: calc(#{$cell} * 19 + #{$board-borderthickness} * 2);
+$size9-mob: calc(#{$cell-mob} * 9 + #{$board-borderthickness} * 2);
+$size13-mob: calc(#{$cell-mob} * 13 + #{$board-borderthickness} * 2);
+$size19-mob: calc(#{$cell-mob} * 19 + #{$board-borderthickness} * 2);
+
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  float: left;
+  margin-top: -30vw;
+  overflow: visible;
+  position: relative;
+  z-index: 99;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    justify-content: center;
+    border-left: $board-borderthickness solid $board-border;
+    border-right: $board-borderthickness solid $board-border;
+    &:first-child {
+      border-top: $board-borderthickness solid $board-border;
+    }
+    &:last-child {
+      border-bottom: $board-borderthickness solid $board-border;
+    }
+  }
+  .pit {
+    width: $cell;
+    height: $cell;
+    position: relative;
+    @include for-size(phone-only) {
+      width: $cell-mob;
+      height: $cell-mob;
+    }
+    &:hover {
+      background: #4d9c9875;
+      border-radius: 20%;
+      cursor: none;
+    }
+  }
+  .pit.noHover {
+    pointer-events: none;
+  }
+  .pit.markBlack {
+    border-radius: 50%;
+    background: #13131352;
+  }
+  .pit.markWhite {
+    border-radius: 50%;
+    background: #ffffff62;
+  }
+}
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  color: #fff;
+  position: relative;
+  // box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  background: #d9a569;
+  z-index: 1;
+  // background-color: rgba(255, 255, 255, 0.15);
+  // backdrop-filter: blur(5px);
+  // background: inherit;
+  // &:before {
+  //   content: "";
+  //   position: absolute;
+  //   background: inherit;
+  //   z-index: -1;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.5);
+  //   filter: blur(10px);
+  //   margin: -20px;
+  // }
+  // &:before {
+  //   background-image: linear-gradient(180deg, black 0, transparent 1px),
+  //     linear-gradient(90deg, black 0, transparent 1px);
+  //   background-size: $cell $cell;
+  //   bottom: 0;
+  //   content: "";
+  //   display: block;
+  //   left: $board-borderthickness;
+  //   position: absolute;
+  //   right: $board-borderthickness;
+  //   top: $cell;
+  //   width: $size19;
+  //   height: $size19;
+  // }
+  .row {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    justify-content: center;
+    border-left: $board-borderthickness solid $board-border;
+    border-right: $board-borderthickness solid $board-border;
+    &:first-child {
+      border-top: $board-borderthickness solid $board-border;
+    }
+    &:last-child {
+      border-bottom: $board-borderthickness solid $board-border;
+    }
+  }
+
+  .cell {
+    width: $cell;
+    height: $cell;
+    position: relative;
+    // background: #d9a569;
+    @include for-size(phone-only) {
+      width: $cell-mob;
+      height: $cell-mob;
+    }
+  }
+}
+
+// .size9 {
+//   width: $size9;
+//   height: $size9;
+// }
+// .size13 {
+//   width: $size13;
+//   height: $size13;
+// }
+// .size19 {
+//   width: $size19;
+//   height: $size19;
+// }
+
+.sizeg9 {
+  width: $size9;
+  height: $size9;
+  margin-top: calc(#{$size9} * -1);
+  @include for-size(phone-only) {
+    margin-top: calc(#{$size9-mob} * -1);
+    width: $size9-mob;
+    height: $size9-mob;
+  }
+}
+.sizeg13 {
+  width: $size13;
+  height: $size13;
+  margin-top: calc(#{$size13} * -1);
+  @include for-size(phone-only) {
+    margin-top: calc(#{$size13-mob} * -1);
+    width: $size13-mob;
+    height: $size13-mob;
+  }
+}
+.sizeg19 {
+  width: $size19;
+  height: $size19;
+  margin-top: calc(#{$size19} * -1);
+  @include for-size(phone-only) {
+    margin-top: calc(#{$size19-mob} * -1);
+    width: $size19-mob;
+    height: $size19-mob;
+  }
+}
+
+.cross.regular {
+  height: $cross-size;
+  background: $cross-colour;
+  position: absolute;
+  left: calc(#{$cross-size}/ 2);
+  width: $cross-linethickness;
+  @include for-size(phone-only) {
+    height: #{$cross-size-mob};
+    left: calc(#{$cross-size-mob}/ 2);
+  }
+  &:after {
+    background: $cross-colour;
+    content: "";
+    height: $cross-linethickness;
+    left: calc(-#{$cross-size}/ 2);
+    position: absolute;
+    top: calc(#{$cross-size}/ 2);
+    width: $cross-size;
+    @include for-size(phone-only) {
+      left: calc(-#{$cross-size-mob}/ 2);
+      top: calc(#{$cross-size-mob}/ 2);
+      width: $cross-size-mob;
+    }
+  }
+}
+
+.cross.left {
+  height: $cross-size;
+  background: $cross-colour;
+  position: absolute;
+  left: calc(#{$cross-size}/ 2);
+  width: $cross-linethickness;
+  @include for-size(phone-only) {
+    height: #{$cross-size-mob};
+    left: calc(#{$cross-size-mob}/ 2);
+  }
+  &:after {
+    background: $cross-colour;
+    content: "";
+    height: $cross-linethickness;
+    left: 0;
+    position: absolute;
+    top: calc(#{$cross-size}/ 2);
+    width: calc(#{$cross-size}/ 2);
+    @include for-size(phone-only) {
+      top: calc(#{$cross-size-mob}/ 2);
+      width: calc(#{$cross-size-mob}/ 2);
+    }
+  }
+}
+
+.cross.right {
+  height: $cross-size;
+  background: $cross-colour;
+  position: absolute;
+  left: calc(#{$cross-size}/ 2);
+  width: $cross-linethickness;
+  @include for-size(phone-only) {
+    height: #{$cross-size-mob};
+    left: calc(#{$cross-size-mob}/ 2);
+  }
+  &:after {
+    background: $cross-colour;
+    content: "";
+    height: $cross-linethickness;
+    left: calc(-#{$cross-size}/ 2);
+    position: absolute;
+    top: calc(#{$cross-size}/ 2);
+    width: calc(#{$cross-size}/ 2);
+    @include for-size(phone-only) {
+      left: calc(-#{$cross-size-mob}/ 2);
+      top: calc(#{$cross-size-mob}/ 2);
+      width: calc(#{$cross-size-mob}/ 2);
+    }
+  }
+}
+
+.cross.top {
+  height: calc(#{$cross-size}/ 2);
+  background: $cross-colour;
+  position: absolute;
+  left: calc(#{$cross-size}/ 2);
+  top: calc(#{$cross-size}/ 2);
+  width: $cross-linethickness;
+  @include for-size(phone-only) {
+    height: calc(#{$cross-size-mob}/ 2);
+    left: calc(#{$cross-size-mob}/ 2);
+    top: calc(#{$cross-size-mob}/ 2);
+  }
+  &:after {
+    background: $cross-colour;
+    content: "";
+    height: $cross-linethickness;
+    left: calc(-#{$cross-size}/ 2);
+    position: absolute;
+    top: 0;
+    width: $cross-size;
+    @include for-size(phone-only) {
+      width: $cross-size-mob;
+      left: calc(-#{$cross-size-mob}/ 2);
+    }
+  }
+}
+
+.cross.bottom {
+  height: calc(#{$cross-size}/ 2);
+  background: $cross-colour;
+  position: absolute;
+  left: calc(#{$cross-size}/ 2);
+  top: 0;
+  width: $cross-linethickness;
+  @include for-size(phone-only) {
+    height: calc(#{$cross-size-mob}/ 2);
+    left: calc(#{$cross-size-mob}/ 2);
+  }
+  &:after {
+    background: $cross-colour;
+    content: "";
+    height: $cross-linethickness;
+    left: calc(-#{$cross-size}/ 2);
+    top: calc(#{$cross-size}/ 2);
+    position: absolute;
+    width: $cross-size;
+    @include for-size(phone-only) {
+      width: $cross-size-mob;
+      left: calc(-#{$cross-size-mob}/ 2);
+      top: calc(#{$cross-size-mob}/ 2);
+    }
+  }
+}
+
+.cross.top.cross.left::after {
+  left: 0;
+}
+
+.cross.bottom.cross.left::after {
+  left: 0;
+}
+
+.cross.top.cross.right::after {
+  width: calc(#{$cross-size}/ 2);
+  @include for-size(phone-only) {
+    width: calc(#{$cross-size-mob}/ 2);
+  }
+}
+
+.cross.bottom.cross.right::after {
+  width: calc(#{$cross-size}/ 2);
+  @include for-size(phone-only) {
+    width: calc(#{$cross-size-mob}/ 2);
+  }
+}

@@ -1,0 +1,114 @@
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.Splash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background: #2b2219;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  .container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #2b4040;
+    border-radius: 5%;
+    @include for-size(phone-only) {
+      width: 80%;
+    }
+    .title {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      border-bottom: 3pt solid #d3b14b71;
+      h2 {
+        margin: 0;
+        font-size: 4em;
+        text-shadow: 2px 8px 6px rgba(0, 0, 0, 0.2),
+          0px -5px 35px rgba(255, 255, 255, 0.3);
+        color: #fff9e9;
+      }
+      span {
+        color: rgba(212, 255, 240, 0.5);
+        font-size: 1em;
+        margin-top: 2em;
+        margin-left: 0.5em;
+      }
+    }
+
+    .text {
+      margin-top: 2vw;
+      text-align: left;
+      color: #c7c5c5;
+    }
+    .gameOptions {
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: row;
+      width: 20vw;
+      margin-top: 1vw;
+      @include for-size(phone-only) {
+        width: 100%;
+        align-self: center;
+        margin-top: 3vw;
+      }
+      .gBox {
+        display: flex;
+        width: 5vw;
+        height: 5vw;
+        justify-content: center;
+        align-items: center;
+        background: #e8cc7b;
+        @include for-size(phone-only) {
+          width: 16vw;
+          height: 16vw;
+        }
+        span {
+          color: #555555;
+          font-size: 1.5vw;
+          font-weight: 600;
+          @include for-size(phone-only) {
+            font-size: 5vw;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+          background: #e8c17b;
+        }
+        &:hover span {
+          color: #000;
+          font-size: 1.6vw;
+          @include for-size(phone-only) {
+            font-size: 5.5vw;
+          }
+        }
+      }
+    }
+  }
+}

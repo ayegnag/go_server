@@ -1,0 +1,20 @@
+<svg width="500" height="224" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="226" width="502" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_18">
+   <ellipse stroke="#000" ry="111.999991" rx="111.999991" id="svg_14" cy="111.999998" cx="260.161915" stroke-width="0" fill="#3d3a31"/>
+   <ellipse stroke="#000" ry="111.999991" rx="111.999991" id="svg_15" cy="111.99999" cx="187.161915" stroke-width="0" fill="#fff"/>
+   <text opacity="0.8" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Euphoria, sans-serif" font-size="85" id="svg_10" y="141.499985" x="128.146286" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#47525e">Go</text>
+   <text transform="matrix(0.42103908768893905,0,0,0.42103908768893905,153.09823361638232,112.60459982733998) " font-weight="normal" stroke="#000" xml:space="preserve" text-anchor="start" font-family="Oswald, sans-serif" font-size="48" id="svg_13" y="214.061558" x="476.357108" stroke-opacity="null" stroke-width="0" fill="#ffffff">By Gangeya</text>
+  </g>
+ </g>
+</svg>

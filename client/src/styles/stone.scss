@@ -1,0 +1,93 @@
+$cell: 2vw;
+$cell-mob: 5vw;
+
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.stone {
+  $stoneSize: $cell - 2;
+  border: {
+    radius: 50%;
+  }
+  display: block;
+  height: $stoneSize;
+  position: absolute;
+  width: $stoneSize;
+  top: calc(#{$cell}* 0.12);
+  left: calc(#{$cell}* 0.12);
+  @include for-size(phone-only) {
+    $stoneSize: $cell-mob - 2;
+    top: calc(#{$cell-mob} * 0.12);
+    left: calc(#{$cell-mob} * 0.12);
+  }
+  &:before,
+  &:after {
+    border-radius: 50%;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &:before {
+    z-index: 2;
+  }
+
+  &:after {
+    box-shadow: 2.5px 4px 0.5em hsla(0, 0%, 0%, 0.5);
+    z-index: 1;
+  }
+
+  &.black {
+    &:before {
+      background: {
+        color: black;
+        image: linear-gradient(145deg, transparent, black 65%),
+          radial-gradient(
+            $cell - 1 at 42% 38%,
+            hsla(0, 0%, 100%, 0.25) 0%,
+            hsla(0, 0%, 100%, 0.25) 35%,
+            transparent 36%
+          );
+      }
+    }
+  }
+  &.white {
+    &:before {
+      background: {
+        color: hsla(0, 0%, 90%, 1);
+        image: linear-gradient(145deg, transparent, white 65%),
+          radial-gradient(
+            $cell - 1 at 42% 38%,
+            hsla(0, 0%, 100%, 1) 0%,
+            hsla(0, 0%, 100%, 1) 35%,
+            transparent 36%
+          );
+      }
+    }
+  }
+}
