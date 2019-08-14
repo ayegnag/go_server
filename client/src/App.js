@@ -5,7 +5,7 @@ import "./App.scss";
 import loading from "./pages/home/loading.gif";
 import openSocket from "socket.io-client";
 
-const baseUrl = "wss://go-game-server-gangeya.herokuapp.com";
+const baseUrl = window.location.origin;
 const socket = openSocket(baseUrl);
 
 class App extends Component {
