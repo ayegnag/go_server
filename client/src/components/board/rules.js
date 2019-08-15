@@ -73,7 +73,7 @@ const findNeighbours = (stone, boardState) => {
 };
 
 const isWithinBounds = (stone, size) => {
-  console.log("TCL: isWithinBounds -> stone, size", stone, size);
+  // console.log("TCL: isWithinBounds -> stone, size", stone, size);
   return (
     stone &&
     stone.row < size &&
@@ -191,10 +191,12 @@ function getScores(board, size) {
   // console.log("Territory : ", territory);
   console.log("BlackTerritory : ", blackArea);
   console.log("WhiteTerritory : ", whiteArea);
-  if (whiteArea.length > blackArea.length) {
-    message = `White Won by ${whiteArea.length} points!!`;
+  const whitePoints = whiteArea.length + 0.5;
+  const blackPoints = blackArea.length;
+  if (whitePoints > blackPoints) {
+    message = `White Won by ${whitePoints - blackPoints} points!!`;
   } else {
-    message = `Black Won by ${blackArea.length} points!!`;
+    message = `Black Won by ${blackPoints - whitePoints} points!!`;
   }
   return {
     message
@@ -257,8 +259,14 @@ function rules(newStone, xy, boardState, size, history, showError) {
   }
 
   const isKo = (history, boardState) => {
+    // console.log("TCL: isKo -> history, boardState", history, boardState);
     const countTo = history.length > 10 ? history.length - 10 : 0;
     for (let last = history.length - 1; last >= countTo; last--) {
+      console.log(
+        "TCL: isKo -> history[last], boardState",
+        history[last],
+        boardState
+      );
       if (deepEqual(history[last], boardState)) {
         console.log("Ko found!", last);
         return true;

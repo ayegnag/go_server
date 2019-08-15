@@ -1,6 +1,6 @@
 import React, { Component } from "reactn";
 import "./home.scss";
-import logo from "./goLogoS.svg";
+// import logo from "./goLogoS.svg";
 
 export default class Home extends Component {
   constructor(props) {
@@ -86,10 +86,10 @@ export default class Home extends Component {
   render() {
     const { screen, selectedSize, selectedStone, code } = this.state;
     const { createGame, joinGame, playSolo } = this.props;
-    const svgPath = `${logo}#svgView(preserveAspectRatio(xMidYMin slice))`;
+    // const svgPath = `${logo}#svgView(preserveAspectRatio(xMidYMin slice))`;
     return (
       <div>
-        <div className="pageTitle">
+        {/* <div className="pageTitle">
           <div className="titleContainer">
             <img
               className="logo"
@@ -98,7 +98,7 @@ export default class Home extends Component {
               alt="Go: by Gangeya"
             />
           </div>
-        </div>
+        </div> */}
         {screen === "mainScreen" && (
           <div className="menu">
             <div className="sub">Strategize. Capture. Win.</div>
@@ -164,7 +164,7 @@ export default class Home extends Component {
             </div>
             <div className="menuBar">
               <div
-                className="menuButton dark"
+                className="menuButton"
                 onClick={() => playSolo(selectedSize)}
               >
                 Start Game
@@ -233,7 +233,7 @@ export default class Home extends Component {
             </div>
             <div className="menuBar">
               <div
-                className="menuButton dark"
+                className="menuButton"
                 onClick={() => createGame(selectedSize, selectedStone, code)}
               >
                 Start Game

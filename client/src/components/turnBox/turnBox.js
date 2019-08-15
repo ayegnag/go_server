@@ -21,7 +21,7 @@ export default class TurnBox extends Component {
     const { sendUpdate } = this.props;
     if (passed) {
       this.setGlobal({ gameOver: true });
-      this.endGame();
+      // this.endGame();
     }
     this.setGlobal({ turn: turn === 1 ? 2 : 1, passed: true }, () => {
       console.log("TCL: TurnBox -> sendUpdate Pass");
@@ -32,9 +32,15 @@ export default class TurnBox extends Component {
     const { passed } = this.global;
     if (passed) {
       this.setGlobal({ gameOver: true });
-      this.endGame();
+      // this.endGame();
     }
     this.setGlobal({ turn: turn === 1 ? 2 : 1, passed: true });
+  };
+
+  endGameRemote = () => {
+    const { sendUpdate } = this.props;
+    this.setGlobal({ gameOver: true });
+    sendUpdate();
   };
 
   endGame() {
@@ -129,11 +135,16 @@ export default class TurnBox extends Component {
       remoteGame,
       thisPlayerStone
     } = this.global;
-
+    const turnMessaage = remoteGame
+      ? thisPlayerStone === turn
+        ? "Your turn!"
+        : "Wait..."
+      : "Next turn";
+    const turnClass = `Turn ${remoteGame ? "long" : ""}`;
     return (
-      <div className="Turn">
+      <div className={turnClass}>
         <div className="infoContainer">
-          <span className="title">Next Turn</span>
+          <span className="title">{turnMessaage}</span>
           <div className="big">
             {turn === 1 && <div className="big stone white" />}
             {turn === 2 && <div className="big stone black" />}
@@ -162,6 +173,12 @@ export default class TurnBox extends Component {
           )}
           {gameCode && (
             <div className="bottomTools">
+              <button
+                className="button red"
+                onClick={() => this.endGameRemote()}
+              >
+                Give Up!
+              </button>
               <span className="gCode">Code: {gameCode}</span>
             </div>
           )}

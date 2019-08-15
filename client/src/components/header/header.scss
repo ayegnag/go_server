@@ -1,0 +1,66 @@
+@mixin for-size($size) {
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
+}
+
+.header {
+  width: 100%;
+  height: 8em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: #5b3630a6;
+  @include for-size(phone-only) {
+    height: 6em;
+  }
+  .leftContainer {
+    flex: 1;
+    height: 100%;
+  }
+  .rightContainer {
+    flex: 1;
+    height: 100%;
+  }
+  .logoContainer {
+    position: relative;
+    flex: 1;
+    height: 100%;
+  }
+  .titleContainer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -18%;
+    flex: 1;
+    .logo {
+      height: 9vw;
+      @include for-size(phone-only) {
+        height: 35vw;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

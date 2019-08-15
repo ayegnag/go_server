@@ -1,6 +1,7 @@
 import React, { Component } from "reactn";
 import Home from "./pages/home/home";
 import Game from "./pages/game/game";
+import Header from "./components/header/header";
 import "./App.scss";
 import loading from "./pages/home/loading.gif";
 import openSocket from "socket.io-client";
@@ -163,17 +164,20 @@ class App extends Component {
           </div>
         )}
         {page === "home" && (
-          <Home
-            createGame={this.createGame}
-            joinGame={this.joinGame}
-            playSolo={this.playSolo}
-            focusInput={wrongCode}
-          />
+          <>
+            <Header className="headerBar" goHome />
+            <Home
+              createGame={this.createGame}
+              joinGame={this.joinGame}
+              playSolo={this.playSolo}
+              focusInput={wrongCode}
+            />
+          </>
         )}
         {page === "game" && (
           <Game sendUpdate={this.remoteUpdate} code={gameCode} />
         )}
-        <div className="footerBar">Go (ver: 0.8) a game by Gangeya.</div>
+        <div className="footerBar">Go (ver: 0.9) a game by Gangeya.</div>
       </div>
     );
   }
