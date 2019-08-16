@@ -1,7 +1,7 @@
 import React, { Component } from "reactn";
 import "./errorBox.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Star from "./spinStar/star";
+import Leaf from "./fallLeaf/leaf";
 
 export default class ErrorBox extends Component {
   hideBox = () => {
@@ -25,13 +25,14 @@ export default class ErrorBox extends Component {
     document.removeEventListener("keydown", this.escFunction, false);
   }
   render() {
-    const { showError, gameOver } = this.global;
+    const { showError, gameOver, thisPlayerStone, winner } = this.global;
     const { message, show } = showError;
     return (
       <>
         {show && (
           <div onClick={this.hideBox} className="errModal">
-            {gameOver && <FontAwesomeIcon icon={faStar} className="star" />}
+            {gameOver && thisPlayerStone === winner && <Star />}
+            {gameOver && thisPlayerStone !== winner && <Leaf />}
             {message}
           </div>
         )}

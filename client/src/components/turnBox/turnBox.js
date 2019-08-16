@@ -44,12 +44,17 @@ export default class TurnBox extends Component {
   };
 
   endGame() {
-    const { boardData, boardSize } = this.global;
+    const { boardData, boardSize, thisPlayerStone } = this.global;
     console.log("TCL: TurnBox -> endGame -> boardState", boardData);
     // Do the calculation and find winner.
-    const { message } = getScores(boardData, boardSize);
+    const { message, winner } = getScores(
+      boardData,
+      boardSize,
+      thisPlayerStone
+    );
     this.setGlobal({
       // boardData: board,
+      winner,
       showError: { show: true, message }
     });
     console.log("GameOver");

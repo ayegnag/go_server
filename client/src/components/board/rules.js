@@ -158,7 +158,7 @@ const initTerritory = size => {
   return teri;
 };
 
-function getScores(board, size) {
+function getScores(board, size, thisPlayer) {
   console.log("Scoring...");
   const blackArea = [];
   const whiteArea = [];
@@ -193,13 +193,24 @@ function getScores(board, size) {
   console.log("WhiteTerritory : ", whiteArea);
   const whitePoints = whiteArea.length + 0.5;
   const blackPoints = blackArea.length;
-  if (whitePoints > blackPoints) {
-    message = `White Won by ${whitePoints - blackPoints} points!!`;
+  let winner;
+  if (thisPlayer === 1 && whitePoints > blackPoints) {
+    winner = 1;
+    message = `Awesome! You Won by ${whitePoints - blackPoints} points!!`;
   } else {
-    message = `Black Won by ${blackPoints - whitePoints} points!!`;
+    winner = 1;
+    message = `You Lost by ${whitePoints - blackPoints} points!!`;
+  }
+  if (thisPlayer === 2 && blackPoints > whitePoints) {
+    winner = 2;
+    message = `Awesome! You Won by ${blackPoints - whitePoints} points!!`;
+  } else {
+    winner = 2;
+    message = `You Lost by ${blackPoints - whitePoints} points!!`;
   }
   return {
-    message
+    message,
+    winner
   };
 }
 

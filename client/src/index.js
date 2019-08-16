@@ -24,6 +24,7 @@ setGlobal({
     col: 0
   },
   passed: false,
+  winner: 0,
   gameOver: false
 });
 

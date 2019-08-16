@@ -4,7 +4,7 @@ import "./header.scss";
 
 export default class Header extends Component {
   render() {
-    const svgPath = `${logo}#svgView(preserveAspectRatio(xMidYMin meet))`;
+    // const svgPath = `${logo}#svgView(preserveAspectRatio(xMidYMin meet))`;
     return (
       <div className="header">
         <div className="leftContainer" />
@@ -12,7 +12,7 @@ export default class Header extends Component {
           <div className="titleContainer">
             <img
               className="logo"
-              src={svgPath}
+              src={logo}
               onClick={this.screenMain}
               alt="Go: by Gangeya"
             />
