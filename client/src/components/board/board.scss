@@ -48,7 +48,7 @@ $size19-mob: calc(#{$cell-mob} * 19 + #{$board-borderthickness} * 2);
   margin-top: -30vw;
   overflow: visible;
   position: relative;
-  z-index: 99;
+  z-index: 50;
 
   .row {
     display: flex;

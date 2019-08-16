@@ -59,6 +59,12 @@ class App extends Component {
     });
   };
 
+  sendShout = emoName => {
+    const { gameCode } = this.global;
+    console.log("sendShout:", emoName);
+    socket.emit("sendShout", { gameCode, shout: emoName });
+  };
+
   remoteUpdate = () => {
     const {
       boardData,
@@ -114,6 +120,10 @@ class App extends Component {
         wrongCode: true,
         wait: false
       });
+    });
+
+    socket.on("gotShout", shout => {
+      this.setGlobal({ shout });
     });
 
     socket.on("setupGame", data => {
@@ -175,7 +185,11 @@ class App extends Component {
           </>
         )}
         {page === "game" && (
-          <Game sendUpdate={this.remoteUpdate} code={gameCode} />
+          <Game
+            sendUpdate={this.remoteUpdate}
+            code={gameCode}
+            sendShout={this.sendShout}
+          />
         )}
         <div className="footerBar">Go (ver: 0.9) a game by Gangeya.</div>
       </div>

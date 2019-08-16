@@ -1,0 +1,13 @@
+.shouter {
+  display: flex;
+  position: absolute;
+  top: 40%;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  z-index: 99;
+  .emoji {
+    cursor: none;
+    font-size: 4em;
+  }
+}

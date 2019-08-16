@@ -25,7 +25,8 @@ setGlobal({
   },
   passed: false,
   winner: 0,
-  gameOver: false
+  gameOver: false,
+  shout: ""
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));

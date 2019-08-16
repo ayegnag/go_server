@@ -41,6 +41,11 @@ io.on("connection", client => {
     console.log(`Requesting room ${roomId} for setup data `);
     client.to(roomId).emit("setupGame", data);
   });
+  client.on("sendShout", data => {
+    const roomId = data.gameCode;
+    console.log(`Sending shout to room ${roomId}`);
+    client.to(roomId).emit("gotShout", data.shout);
+  });
   client.on("gameMove", req => {
     // const room = io.sockets.adapter.rooms[client.id];
     const { room, data } = req;
