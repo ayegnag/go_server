@@ -7,6 +7,9 @@
   flex-direction: row;
   z-index: 99;
   .emoji {
+    span {
+      box-shadow: 0 0 15px #302a14;
+    }
     cursor: none;
     font-size: 4em;
   }

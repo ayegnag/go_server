@@ -65,6 +65,12 @@ class App extends Component {
     socket.emit("sendShout", { gameCode, shout: emoName });
   };
 
+  sendChat = msg => {
+    const { gameCode } = this.global;
+    console.log("sendChat:", msg);
+    socket.emit("sendChat", { gameCode, chat: msg });
+  };
+
   remoteUpdate = () => {
     const {
       boardData,

@@ -5,10 +5,11 @@ import TurnBox from "../../components/turnBox/turnBox";
 import ErrorBox from "../../components/errorBox/errorBox";
 import SideBar from "../../components/sideBar/sideBar";
 import Shouter from "../../components/shouter/shouter";
+import ChatBar from "../../components/chatBar/chatBar";
 
 export default class Game extends Component {
   render() {
-    const { sendUpdate, sendShout } = this.props;
+    const { sendUpdate, sendShout, sendChat } = this.props;
     const { boardSize, gameOver, shout } = this.global;
     return (
       <>
@@ -22,6 +23,7 @@ export default class Game extends Component {
           </div>
           <TurnBox sendUpdate={sendUpdate} gameOver={gameOver} />
         </div>
+        <ChatBar sendChat={sendChat} />
       </>
     );
   }

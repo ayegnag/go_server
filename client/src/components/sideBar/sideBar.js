@@ -1,7 +1,8 @@
 import React, { Component } from "reactn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faExclamation, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Emo from "../emo/emo";
+import { emojiList } from "../emo/emoList";
 import "./sideBar.scss";
 
 export default class SideBar extends Component {
@@ -23,41 +24,33 @@ export default class SideBar extends Component {
       };
     });
   };
+  emojiGen = () => {
+    const emojis = emojiList;
+    const list = emojis.map((emoObj, i) => (
+      <Emo
+        key={i}
+        label={emoObj.label}
+        symbol={emoObj.symbol}
+        click={() => this.showShout(`${emoObj.label}`)}
+      />
+    ));
+
+    return list;
+  };
   render() {
     const { sideHidden } = this.state;
+    const list = this.emojiGen();
     return (
       <div className={`sideBar ${sideHidden ? "hidden" : ""}`}>
         <div className="sideButton" onClick={() => this.toggleSidebar()}>
-          <FontAwesomeIcon icon={faExclamation} className="exc" />
+          {sideHidden && (
+            <FontAwesomeIcon icon={faExclamation} className="exc" />
+          )}
+          {!sideHidden && (
+            <FontAwesomeIcon icon={faAngleRight} className="exc" />
+          )}
         </div>
-        <div className="emoContainer">
-          <Emo
-            label="beaming "
-            symbol="😁"
-            click={() => this.showShout("beaming")}
-          />
-          <Emo
-            label="beaming sweat"
-            symbol="😅"
-            click={() => this.showShout("sweat")}
-          />
-          <Emo
-            label="squint tongue "
-            symbol="😝"
-            click={() => this.showShout("tongue")}
-          />
-          <Emo label="what " symbol="😐" click={() => this.showShout("what")} />
-          <Emo
-            label="cry loud "
-            symbol="😭"
-            click={() => this.showShout("cry")}
-          />
-          <Emo
-            label="confounded "
-            symbol="😖"
-            click={() => this.showShout("confounded")}
-          />
-        </div>
+        <div className="emoContainer">{list}</div>
       </div>
     );
   }

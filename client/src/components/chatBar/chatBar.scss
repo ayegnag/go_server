@@ -1,0 +1,50 @@
+.chatBar.hidden {
+  .chatButton {
+    color: #ffffff60;
+  }
+  .chatBox {
+    display: none;
+  }
+}
+.chatBar {
+  position: absolute;
+  bottom: 0.8em;
+  left: 0;
+  right: 0;
+  background: #5b3630a6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  .chatButton {
+    display: flex;
+    position: absolute;
+    width: 3em;
+    height: 3em;
+    bottom: 100%;
+    left: 0;
+    background: #5b3630a6;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 1.2em;
+    transform: scale(-1, 1);
+    &:hover {
+      cursor: pointer;
+      background: #7a4941a6;
+    }
+  }
+  .chatBox {
+    width: 90%;
+    position: relative;
+    display: flex;
+    padding: 1em;
+    input {
+      width: 90%;
+      line-height: 2em;
+      border-radius: 1em;
+    }
+  }
+}
