@@ -68,7 +68,7 @@ class App extends Component {
   sendChat = msg => {
     const { gameCode } = this.global;
     console.log("sendChat:", msg);
-    socket.emit("sendChat", { gameCode, chat: msg });
+    socket.emit("chatMsg", { roomId: gameCode, msg });
   };
 
   remoteUpdate = () => {
@@ -167,6 +167,23 @@ class App extends Component {
         });
       }
     });
+    socket.on("gotChat", data => {
+      const { msg, timeStamp } = data;
+      console.log("Received chat msg:", data);
+      this.setGlobal(prevState => {
+        return {
+          newMsg: true,
+          msgQueue: [
+            ...prevState.msgQueue,
+            {
+              message: msg,
+              timeStamp,
+              thisPlayer: false
+            }
+          ]
+        };
+      });
+    });
   }
 
   render() {
@@ -198,7 +215,7 @@ class App extends Component {
             sendChat={this.sendChat}
           />
         )}
-        <div className="footerBar">Go (ver: 0.9) a game by Gangeya.</div>
+        <div className="footerBar">Go (ver: 0.9c) a game by Gangeya.</div>
       </div>
     );
   }

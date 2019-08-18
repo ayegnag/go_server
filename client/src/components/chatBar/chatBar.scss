@@ -2,6 +2,9 @@
   .chatButton {
     color: #ffffff60;
   }
+  .chatButton.new {
+    color: #ffe139;
+  }
   .chatBox {
     display: none;
   }
@@ -14,17 +17,13 @@
   bottom: 0.8em;
   left: 0;
   right: 0;
-  background: #5b3630a6;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   z-index: 97;
   .msgContainer {
-    z-index: 98;
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    right: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -54,24 +53,34 @@
       color: #333;
       padding: 0.5em;
       margin: 0.2em;
+      display: flex;
+      flex-direction: column;
+      max-width: 50vw;
+      .ts {
+        font-size: 0.7em;
+      }
     }
     .chatBubble.left {
       align-self: flex-start;
       background: rgb(130, 187, 56);
+      .ts {
+        align-self: flex-start;
+      }
     }
     .chatBubble.right {
       align-self: flex-end;
       background: rgb(211, 186, 78);
+      .ts {
+        align-self: flex-end;
+      }
     }
   }
   .chatButton {
     display: flex;
     z-index: 100;
-    position: absolute;
     width: 3em;
     height: 3em;
-    bottom: 100%;
-    left: 0;
+    align-self: flex-start;
     background: #5b3630a6;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
@@ -86,13 +95,14 @@
     }
   }
   .chatBox {
-    width: 90%;
+    width: 100%;
     position: relative;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     padding: 1em;
+    background: #5b3630a6;
     input {
-      width: 90%;
+      width: 70%;
       line-height: 2em;
       border-radius: 1em;
       padding-left: 1em;
@@ -100,13 +110,12 @@
   }
   .sendButton {
     background: #e8cc7b;
-    border-radius: 0.8em;
+    border-radius: 2em;
     color: #5a2409;
     font-weight: 600;
     border: none;
-    padding: 0.6vw;
-    padding-left: 2vw;
-    padding-right: 2vw;
+    padding: 0.8em;
+    margin-left: 0.5em;
     &:hover {
       background: #e8cc00;
       cursor: pointer;

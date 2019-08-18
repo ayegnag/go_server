@@ -52,6 +52,11 @@ io.on("connection", client => {
     client.to(room).emit("turnData", data);
     console.log("Player made a move ", room);
   });
+  client.on("chatMsg", req => {
+    const { roomId, msg } = req;
+    client.to(roomId).emit("gotChat", msg);
+    console.log("Player sent msg ", msg);
+  });
 });
 
 const PORT = process.env.PORT || 5000;

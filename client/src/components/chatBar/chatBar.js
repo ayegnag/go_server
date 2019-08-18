@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from "reactn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCommentAlt,
   faAngleDown,
-  faPaperPlane
+  faEnvelope
 } from "@fortawesome/free-solid-svg-icons";
 import ChatBubble from "./chatBubble";
 import "./chatBar.scss";
@@ -12,43 +12,63 @@ export default class ChatBar extends Component {
   constructor() {
     super();
     this.state = {
-      chatHidden: true,
-      msgQueue: []
+      chatHidden: true
     };
     this.chatInput = React.createRef();
     this.msgContainer = React.createRef();
   }
 
   toggleChatbar = () => {
+    if (this.state.chatHidden) {
+      this.setGlobal({
+        newMsg: false
+      });
+    }
     this.setState(prevState => {
       return {
         chatHidden: prevState.chatHidden ? false : true
       };
     });
   };
+  scrollToBottom = () => {
+    const scrollHeight = this.msgContainer.current.scrollHeight;
+    const height = this.msgContainer.current.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    this.msgContainer.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  };
   sendChat = () => {
     const msgVal = this.chatInput.current.value;
     console.log("TCL: ChatBar -> sendChat -> msgVal", msgVal);
     const { sendChat } = this.props;
-    this.setState(prevState => {
+    const ts = new Date().getTime();
+    this.setGlobal(prevState => {
       return {
-        msgQueue: [...prevState.msgQueue, { message: msgVal, thisPlayer: true }]
+        msgQueue: [
+          ...prevState.msgQueue,
+          { message: msgVal, thisPlayer: true, timeStamp: ts }
+        ]
       };
     });
-    sendChat(msgVal);
+    sendChat({ msg: msgVal, timeStamp: ts });
     this.chatInput.current.value = "";
-    this.msgContainer.current.scrollTop = this.msgContainer.current.scrollHeight;
   };
   handleKeyDown = e => {
     if (e.key === "Enter") {
       this.sendChat();
     }
   };
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
   render() {
-    const { chatHidden, msgQueue } = this.state;
+    const { chatHidden } = this.state;
+    const { msgQueue, newMsg } = this.global;
     return (
       <div className={`chatBar ${chatHidden ? "hidden" : ""}`}>
-        <div className="chatButton" onClick={() => this.toggleChatbar()}>
+        <div
+          className={`chatButton ${chatHidden && newMsg ? "new" : ""}`}
+          onClick={() => this.toggleChatbar()}
+        >
           {chatHidden && (
             <FontAwesomeIcon icon={faCommentAlt} className="exc" />
           )}
@@ -58,17 +78,17 @@ export default class ChatBar extends Component {
         </div>
         <div className="msgContainer" ref={this.msgContainer}>
           {msgQueue.map(msgObj => (
-            <ChatBubble msg={msgObj} />
+            <ChatBubble key={msgObj.timeStamp} msg={msgObj} />
           ))}
         </div>
         <div className="chatBox">
           <input
             ref={this.chatInput}
-            maxLength={30}
+            maxLength={90}
             onKeyDown={this.handleKeyDown}
           />
           <button className="sendButton" onClick={() => this.sendChat()}>
-            <FontAwesomeIcon icon={faPaperPlane} className="exc" />
+            <FontAwesomeIcon icon={faEnvelope} className="exc" />
           </button>
         </div>
       </div>
