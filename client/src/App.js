@@ -195,6 +195,7 @@ class App extends Component {
             sendUpdate={this.remoteUpdate}
             code={gameCode}
             sendShout={this.sendShout}
+            sendChat={this.sendChat}
           />
         )}
         <div className="footerBar">Go (ver: 0.9) a game by Gangeya.</div>
