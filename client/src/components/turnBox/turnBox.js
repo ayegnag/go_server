@@ -53,7 +53,6 @@ export default class TurnBox extends Component {
       thisPlayerStone
     );
     this.setGlobal({
-      // boardData: board,
       winner,
       showError: { show: true, message }
     });

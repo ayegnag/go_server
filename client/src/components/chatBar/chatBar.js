@@ -58,6 +58,11 @@ export default class ChatBar extends Component {
     }
   };
   componentDidUpdate() {
+    if (this.global.newMsg && !this.state.chatHidden) {
+      this.setGlobal({
+        newMsg: false
+      });
+    }
     this.scrollToBottom();
   }
   render() {

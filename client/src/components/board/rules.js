@@ -197,16 +197,16 @@ function getScores(board, size, thisPlayer) {
   if (thisPlayer === 1 && whitePoints > blackPoints) {
     winner = 1;
     message = `Awesome! You Won by ${whitePoints - blackPoints} points!!`;
-  } else {
-    winner = 1;
-    message = `You Lost by ${whitePoints - blackPoints} points!!`;
+  } else if (thisPlayer === 1 && blackPoints > whitePoints) {
+    winner = 2;
+    message = `You Lost by ${blackPoints - whitePoints} points!!`;
   }
   if (thisPlayer === 2 && blackPoints > whitePoints) {
     winner = 2;
     message = `Awesome! You Won by ${blackPoints - whitePoints} points!!`;
-  } else {
-    winner = 2;
-    message = `You Lost by ${blackPoints - whitePoints} points!!`;
+  } else if (thisPlayer === 2 && whitePoints > blackPoints) {
+    winner = 1;
+    message = `You Lost by ${whitePoints - blackPoints} points!!`;
   }
   return {
     message,
