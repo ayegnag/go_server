@@ -27,13 +27,15 @@ io.on("connection", client => {
     console.log("TCL: roomInfo", roomInfo);
     if (roomInfo === undefined) {
       client.emit("wrongCode");
+    } else if (roomInfo.sockets.length >= 2) {
+      client.emit("roomFull");
     } else {
       client.join(roomId);
       client.to(roomId).emit("requestGame");
     }
   });
   client.on("joinRoom", roomId => {
-    console.log(`Player ${client.id} is joining a new Room ${roomId}`);
+    console.log(`Player ${client.id} is Creating a new Room ${roomId}`);
     client.join(roomId);
   });
   client.on("sendSetup", data => {
@@ -57,6 +59,20 @@ io.on("connection", client => {
     client.to(roomId).emit("gotChat", msg);
     console.log("Player sent msg ", msg);
   });
+  client.on("typing", roomId => {
+    client.to(roomId).emit("typing");
+    console.log(`Player ${client.id} is typing... `);
+  });
+  client.on("notTyping", roomId => {
+    client.to(roomId).emit("stopTyping");
+    console.log(`Player ${client.id} is Not typing. `);
+  });
+  // client.on("disconnect", () => {
+  //   const rooms = Object.keys(client.rooms);
+  //   console.log("TCL: rooms", rooms);
+  //   // client.to(roomId).emit("gotChat", msg);
+  //   // console.log("Player sent msg ", msg);
+  // });
 });
 
 const PORT = process.env.PORT || 5000;

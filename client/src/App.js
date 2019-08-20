@@ -10,6 +10,10 @@ const baseUrl = window.location.origin;
 const socket = openSocket(baseUrl);
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.typingTimer = null;
+  }
   state = {
     page: "home",
     wait: false,
@@ -71,6 +75,18 @@ class App extends Component {
     socket.emit("chatMsg", { roomId: gameCode, msg });
   };
 
+  notTyping = () => {
+    const { gameCode } = this.global;
+    socket.emit("notTyping", gameCode);
+  };
+
+  isTyping = () => {
+    const { gameCode } = this.global;
+    socket.emit("typing", gameCode);
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(this.notTyping, 2000);
+  };
+
   remoteUpdate = () => {
     const {
       boardData,
@@ -130,6 +146,14 @@ class App extends Component {
 
     socket.on("gotShout", shout => {
       this.setGlobal({ shout });
+    });
+
+    socket.on("typing", () => {
+      this.setGlobal({ isTyping: true });
+    });
+
+    socket.on("stopTyping", () => {
+      this.setGlobal({ isTyping: false });
     });
 
     socket.on("setupGame", data => {
@@ -213,6 +237,7 @@ class App extends Component {
             code={gameCode}
             sendShout={this.sendShout}
             sendChat={this.sendChat}
+            isTyping={this.isTyping}
           />
         )}
         <div className="footerBar">Go (ver: 0.9c) a game by Gangeya.</div>

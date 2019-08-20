@@ -9,7 +9,7 @@ import ChatBar from "../../components/chatBar/chatBar";
 
 export default class Game extends Component {
   render() {
-    const { sendUpdate, sendShout, sendChat } = this.props;
+    const { sendUpdate, sendShout, sendChat, isTyping } = this.props;
     const { boardSize, gameOver, shout } = this.global;
     return (
       <>
@@ -23,7 +23,7 @@ export default class Game extends Component {
           </div>
           <TurnBox sendUpdate={sendUpdate} gameOver={gameOver} />
         </div>
-        <ChatBar sendChat={sendChat} />
+        <ChatBar sendChat={sendChat} isTyping={isTyping} />
       </>
     );
   }

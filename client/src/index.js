@@ -28,7 +28,8 @@ setGlobal({
   gameOver: false,
   shout: "",
   msgQueue: [],
-  newMsg: false
+  newMsg: false,
+  isTyping: false
 });
 
 ReactDOM.render(<App />, document.getElementById("root"));

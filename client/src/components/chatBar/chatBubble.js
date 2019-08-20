@@ -26,12 +26,14 @@ import "./chatBar.scss";
 // };
 
 export default function ChatBubble(props) {
-  const { message, thisPlayer, timeStamp } = props.msg;
+  const { message, thisPlayer, timeStamp, extra } = props.msg;
   const bubbleSide = thisPlayer ? "right" : "left";
   return (
-    <div className={`chatBubble ${bubbleSide}`}>
+    <div className={`chatBubble ${bubbleSide} ${extra}`}>
       <div className="message">{message}</div>
-      <span className="ts">{new Date(timeStamp).toLocaleTimeString()}</span>
+      {timeStamp && (
+        <span className="ts">{new Date(timeStamp).toLocaleTimeString()}</span>
+      )}
     </div>
   );
 }

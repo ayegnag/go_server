@@ -57,6 +57,12 @@ export default class ChatBar extends Component {
       this.sendChat();
     }
   };
+
+  handleKeyUp = e => {
+    const { isTyping } = this.props;
+    isTyping();
+  };
+
   componentDidUpdate() {
     if (this.global.newMsg && !this.state.chatHidden) {
       this.setGlobal({
@@ -65,9 +71,10 @@ export default class ChatBar extends Component {
     }
     this.scrollToBottom();
   }
+
   render() {
     const { chatHidden } = this.state;
-    const { msgQueue, newMsg } = this.global;
+    const { msgQueue, newMsg, isTyping } = this.global;
     return (
       <div className={`chatBar ${chatHidden ? "hidden" : ""}`}>
         <div
@@ -85,12 +92,18 @@ export default class ChatBar extends Component {
           {msgQueue.map(msgObj => (
             <ChatBubble key={msgObj.timeStamp} msg={msgObj} />
           ))}
+          {isTyping && (
+            <ChatBubble
+              msg={{ message: "typing...", thisPlayer: false, extra: "temp" }}
+            />
+          )}
         </div>
         <div className="chatBox">
           <input
             ref={this.chatInput}
             maxLength={90}
             onKeyDown={this.handleKeyDown}
+            onKeyUp={this.handleKeyUp}
           />
           <button className="sendButton" onClick={() => this.sendChat()}>
             <FontAwesomeIcon icon={faEnvelope} className="exc" />
