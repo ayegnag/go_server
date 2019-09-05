@@ -214,7 +214,7 @@ function getScores(board, size, thisPlayer) {
   };
 }
 
-function rules(newStone, xy, boardState, size, history, showError) {
+function rules(newStone, boardState, size, history, showError) {
   const calcLiberties = (stone, chainStones, libStones) => {
     chainStones = chainStones || [];
     libStones = libStones || [];
@@ -273,11 +273,11 @@ function rules(newStone, xy, boardState, size, history, showError) {
     // console.log("TCL: isKo -> history, boardState", history, boardState);
     const countTo = history.length > 10 ? history.length - 10 : 0;
     for (let last = history.length - 1; last >= countTo; last--) {
-      console.log(
-        "TCL: isKo -> history[last], boardState",
-        history[last],
-        boardState
-      );
+      // console.log(
+      //   "TCL: isKo -> history[last], boardState",
+      //   history[last],
+      //   boardState
+      // );
       if (deepEqual(history[last], boardState)) {
         console.log("Ko found!", last);
         return true;
@@ -299,6 +299,7 @@ function rules(newStone, xy, boardState, size, history, showError) {
     showError("suicide");
     result = false;
   }
+  console.log("TCL: rules -> history", history);
   const ko = isKo(history, boardState);
   if (ko) {
     showError("ko");

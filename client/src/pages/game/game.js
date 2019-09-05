@@ -10,11 +10,11 @@ import ChatBar from "../../components/chatBar/chatBar";
 export default class Game extends Component {
   render() {
     const { sendUpdate, sendShout, sendChat, isTyping } = this.props;
-    const { boardSize, gameOver, shout } = this.global;
+    const { boardSize, gameOver, shout, remoteGame } = this.global;
     return (
       <>
         <ErrorBox />
-        <SideBar sendShout={sendShout} />
+        {remoteGame && <SideBar sendShout={sendShout} />}
         <div className="mainContainer">
           <Shouter name={shout} />
           <div className={`container size${boardSize}`}>
@@ -23,7 +23,7 @@ export default class Game extends Component {
           </div>
           <TurnBox sendUpdate={sendUpdate} gameOver={gameOver} />
         </div>
-        <ChatBar sendChat={sendChat} isTyping={isTyping} />
+        {remoteGame && <ChatBar sendChat={sendChat} isTyping={isTyping} />}
       </>
     );
   }

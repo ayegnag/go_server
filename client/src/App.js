@@ -240,7 +240,7 @@ class App extends Component {
             isTyping={this.isTyping}
           />
         )}
-        <div className="footerBar">Go (ver: 0.9c) a game by Gangeya.</div>
+        <div className="footerBar">Go (ver: 1.1b) a game by Gangeya.</div>
       </div>
     );
   }

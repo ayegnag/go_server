@@ -30,7 +30,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  background: #5b3630a6;
+  background: rgba(91, 54, 48, 0.65);
   @include for-size(phone-only) {
     height: 6em;
   }

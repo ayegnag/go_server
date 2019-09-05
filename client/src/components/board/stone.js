@@ -51,7 +51,8 @@ export default class StonePit extends React.Component {
   PlaceStone = (xy, row, col, sendUpdate) => {
     // console.log("TCL: xy", xy);
     const { boardData, turn, boardSize, moveCount, boardHistory } = this.global;
-    const preStones = { ...boardData };
+    const newState = { ...boardData };
+    let prevState;
     const newStone = {
       row,
       col,
@@ -67,15 +68,15 @@ export default class StonePit extends React.Component {
     // Use Game Rule Check here----------------------------------------
     const validMove = isPitOccipied(boardData[xy]);
     if (validMove) {
-      preStones[xy] = newStone;
-      // console.log(
-      // "TCL: StonePit -> PlaceStone -> preStones[xy]",
-      // preStones[xy]
-      // );
+      newState[xy] = newStone;
+      console.log(
+        "TCL: StonePit -> PlaceStone -> newState[xy]",
+        JSON.stringify(newState[xy]),
+        prevState
+      );
       const abidesRules = rules(
         newStone,
-        xy,
-        preStones,
+        newState,
         boardSize,
         boardHistory,
         this.showError
@@ -83,10 +84,12 @@ export default class StonePit extends React.Component {
       if (abidesRules) {
         // console.log("TCL: StonePit -> validMove", validMove);
         // ------------ Rules End
+        prevState = JSON.parse(JSON.stringify(newState)); // Deep copy
         const history = boardHistory;
-        history.push(preStones);
+        history.push(prevState);
+        console.log("TCL: StonePit -> PlaceStone -> history", history);
         this.setGlobal({
-          boardData: { ...preStones },
+          boardData: { ...newState },
           boardHistory: history,
           passed: false,
           moveCount: moveCount + 1

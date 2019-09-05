@@ -59,6 +59,7 @@ $size19-mob: calc(#{$cell-mob} * 19 + #{$board-borderthickness} * 2);
   right: 0;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   img {
     height: 12vh;
     @include for-size(phone-only) {
@@ -70,6 +71,7 @@ $size19-mob: calc(#{$cell-mob} * 19 + #{$board-borderthickness} * 2);
 .App {
   text-align: center;
   height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;

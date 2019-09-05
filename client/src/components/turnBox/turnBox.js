@@ -93,6 +93,7 @@ export default class TurnBox extends Component {
     const stepBack = moveCount - 1;
     if (stepBack >= 0) {
       const lastState = boardHistory[stepBack];
+      console.log("TCL: backwardGame -> lastState", lastState);
       this.setGlobal({
         boardData: lastState,
         moveCount: stepBack
@@ -105,6 +106,7 @@ export default class TurnBox extends Component {
     const stepForward = moveCount + 1;
     if (stepForward < boardHistory.length) {
       const lastState = boardHistory[stepForward];
+      console.log("TCL: forwardGame -> lastState", lastState);
       this.setGlobal({
         boardData: lastState,
         moveCount: stepForward

@@ -1,5 +1,7 @@
 import React, { Component } from "reactn";
 import "./home.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 // import logo from "./goLogoS.svg";
 
 export default class Home extends Component {
@@ -88,7 +90,7 @@ export default class Home extends Component {
     const { createGame, joinGame, playSolo } = this.props;
     // const svgPath = `${logo}#svgView(preserveAspectRatio(xMidYMin slice))`;
     return (
-      <div>
+      <>
         {/* <div className="pageTitle">
           <div className="titleContainer">
             <img
@@ -101,15 +103,16 @@ export default class Home extends Component {
         </div> */}
         {screen === "mainScreen" && (
           <div className="menu">
+            <div className="menuTopBar"></div>
             <div className="sub">Strategize. Capture. Win.</div>
             <div className="menuBar">
               <div className="menuButton large" onClick={this.screenSolo}>
-                Play SOLO
+                Practice Solo
               </div>
             </div>
             <div className="menuBar">
               <div className="menuButton large" onClick={this.screenCreate}>
-                Create Game
+                Two Players
               </div>
             </div>
             <div className="menuBar input">
@@ -122,13 +125,19 @@ export default class Home extends Component {
                 ref={this.codeInput}
               />
               <div className="menuButton" onClick={() => joinGame(code)}>
-                Quick Join
+                Join Game
               </div>
             </div>
           </div>
         )}
         {screen === "soloScreen" && (
           <div className="menu">
+            <div className="menuTopBar">
+              <div className="backButton" onClick={() => this.screenMain()}>
+                <FontAwesomeIcon icon={faAngleLeft} className="exc" />
+                <span> </span>Home
+              </div>
+            </div>
             <div className="text">Chose board size.</div>
             <div className="menuBar">
               <div
@@ -174,6 +183,12 @@ export default class Home extends Component {
         )}
         {screen === "createScreen" && (
           <div className="menu">
+            <div className="menuTopBar">
+              <div className="backButton" onClick={() => this.screenMain()}>
+                <FontAwesomeIcon icon={faAngleLeft} className="exc" />
+                <span> </span>Home
+              </div>
+            </div>
             <div className="text">Share invite code.</div>
             <div className="menuBar">
               <span className="codeBox">{code}</span>
@@ -241,7 +256,7 @@ export default class Home extends Component {
             </div>
           </div>
         )}
-      </div>
+      </>
     );
   }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from "reactn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamation, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { faTired, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Emo from "../emo/emo";
 import { emojiList } from "../emo/emoList";
 import "./sideBar.scss";
@@ -43,9 +43,7 @@ export default class SideBar extends Component {
     return (
       <div className={`sideBar ${sideHidden ? "hidden" : ""}`}>
         <div className="sideButton" onClick={() => this.toggleSidebar()}>
-          {sideHidden && (
-            <FontAwesomeIcon icon={faExclamation} className="exc" />
-          )}
+          {sideHidden && <FontAwesomeIcon icon={faTired} className="exc" />}
           {!sideHidden && (
             <FontAwesomeIcon icon={faAngleRight} className="exc" />
           )}
